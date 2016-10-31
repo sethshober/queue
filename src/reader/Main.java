@@ -24,15 +24,19 @@ package reader;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Main {
 	public static void main(String[] args) {
 		ConcurrentHashMap<Integer, Integer> ageCountMap = new ConcurrentHashMap<Integer, Integer>();
 	    ConcurrentLinkedQueue<String> queue = new ConcurrentLinkedQueue<String>();
-	    Thread producer = new Thread(new Producer(queue));
-	    Thread consumer = new Thread(new Consumer(queue, ageCountMap));
-	    producer.start();
-	    consumer.start();
+	    
+	    ExecutorService producer = Executors.newFixedThreadPool(1);
+	    ExecutorService consumer = Executors.newFixedThreadPool(1);
+	    
+	    producer.submit(() -> new Producer(queue).run());
+	    consumer.submit(() -> new Consumer(queue, ageCountMap).run());
 	}
 }
 	
