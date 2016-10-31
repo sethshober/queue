@@ -14,16 +14,22 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class Producer implements Runnable {
 	   ConcurrentLinkedQueue<String> queue;
+	   
 	   Producer(ConcurrentLinkedQueue<String> queue){
 	      this.queue = queue;
 	   }
-	   public void run() {
-		   BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		  // TODO: improve prompt and add formatting/type checks
+
+	   private BufferedReader createReader() {
+		   return new BufferedReader(new InputStreamReader(System.in));
+	   }
+	   
+	   private void promptUser() {
 		   System.out.println(
-		       "Input ID and Age, separated by commas, and pairs separated by a new line.\n"
-		     + "Example: 01,99");
-		   
+		       "Input ID and Age, separated by commas, and pairs separated by a new line.\n" +
+			   "Example: 01,99");
+	   }
+	   
+	   private void addInputToQueue(BufferedReader reader) {
 		   String line = null;
 		   try {
 		       while ((line=reader.readLine()) != null) {
@@ -36,5 +42,11 @@ public class Producer implements Runnable {
 		   } catch (IOException e) {
 			   e.printStackTrace();
 		   }
+	   }
+	   
+	   public void run() {
+		   BufferedReader reader = createReader();
+		   promptUser();
+		   addInputToQueue(reader);
 	   }
 }
