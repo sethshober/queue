@@ -6,6 +6,8 @@ package reader;
 
 
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class Util {
 	
@@ -30,6 +32,23 @@ public class Util {
 			System.out.printf("%s : %s\n", key, val);
 		});
 	}
+	
+	// shutdown executor safely
+	public static void stop(ExecutorService executor) {
+        try {
+            executor.shutdown();
+            executor.awaitTermination(60, TimeUnit.SECONDS);
+        }
+        catch (InterruptedException e) {
+            System.err.println("termination interrupted");
+        }
+        finally {
+            if (!executor.isTerminated()) {
+                System.err.println("killing non-finished tasks");
+            }
+            executor.shutdownNow();
+        }
+    }
 
 }
 	
