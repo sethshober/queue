@@ -25,9 +25,6 @@ public class Util {
 	
 	// print final age counts
 	public static void printMap(ConcurrentHashMap<Integer, Integer> map) {
-		System.out.println("Age | Count");
-		System.out.println("-----------");
-		// TODO: sort by value
 		map.forEach((key,val) -> {
 			System.out.printf("%s : %s\n", key, val);
 		});

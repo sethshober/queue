@@ -32,7 +32,7 @@ public class Producer implements Runnable {
 	   private void addInputToQueue(BufferedReader reader) {
 		   String line = null;
 		   try {
-		       while ((line=reader.readLine()) != null) {
+		       while ((line = reader.readLine()) != null) {
 				   try {
 					   queue.add(line);
 				   } catch (Exception e) {
