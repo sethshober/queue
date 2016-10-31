@@ -16,8 +16,7 @@ public class UtilTest {
 	
 	@Test
 	public void shouldReturnAge() {
-		String[] vals = {"5","10"};
-		int age = Integer.parseInt(vals[1]);
+		int age = Util.getAge("5,10");
 		assertEquals("age should be 10", 10, age);
 	}
 

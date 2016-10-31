@@ -38,15 +38,15 @@ public class Consumer implements Runnable {
 			
 			Util.printMap(ageCountMap);
 	    }
-	       try {
-	    	   // FIXME: Let's be smarter about our thread use
-	    	   // and not just call run over and over
-	    	   Thread.currentThread().sleep(500);
-	    	   run();
-	       } catch (Exception ex) {
-	    	   ex.printStackTrace();
-	       }
-	   }
+	    try {
+	    	// FIXME: Let's be smarter about our thread use
+	    	// and not just call run over and over
+	    	Thread.currentThread().sleep(500);
+	    	run();
+	    } catch (Exception e) {
+	    	e.printStackTrace();
+	    }
+	}
 }	   
 
 		   
